@@ -1,7 +1,7 @@
 
 
 
-<div class="photo-card">
+{/* <div class="photo-card">
   <img src="" alt="" loading="lazy" />
   <div class="info">
     <p class="info-item">
@@ -17,4 +17,4 @@
       <b>Downloads</b>
     </p>
   </div>
-</div>
+</div> */}
