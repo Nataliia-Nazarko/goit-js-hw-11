@@ -1,6 +1,6 @@
 import './css/styles.css';
 import './js/markup';
-import fetchBildsAPI from './js/service-api';
+import FetchBildsAPI from './js/service-api';
 
 import Notiflix from 'notiflix';
 import SimpleLightbox from 'simplelightbox';
@@ -19,10 +19,10 @@ function onSubmitBtn(e) {
 
     const inputText = refs.inputForm.value.trim();
     
-console.log(inputText)
+    const bildsApi = new FetchBildsAPI();
 
     if (inputText) {
-        fetchBildsAPI(inputText)
+        bildsApi(inputText)
             .then(renderGallery)
             .catch(error => {
                 return Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
