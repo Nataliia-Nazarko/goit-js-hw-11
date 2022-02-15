@@ -1,5 +1,5 @@
 import './css/styles.css';
-import './js/markup';
+import markup from './js/markup';
 import FetchBildsAPI from './js/service-api';
 
 import Notiflix from 'notiflix';
@@ -12,33 +12,39 @@ const refs = {
     gallery: document.querySelector('.gallery'),
 }
 
-refs.submitBtn.addEventListener('click', onSubmitBtn);
+refs.submitBtn.addEventListener('submit', onSubmitBtn);
+const loadbildsApi = new FetchBildsAPI();
+
 
 function onSubmitBtn(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const inputText = refs.inputForm.value.trim();
+  const isFilled = e.currentTarget.elements.searchQuery.value;
+  
+  if (isFilled) {
+    loadService.searchQuery = isFilled;
+    loadService.resetPage();
+    refs.gallery.innerHTML = '';
     
-    const bildsApi = new FetchBildsAPI();
+    loadbildsApi.getBilds()
+      .then(renderGallery)
+      .catch(error => {
+        return Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+      })
+  }
 
-    if (inputText) {
-        bildsApi(inputText)
-            .then(renderGallery)
-            .catch(error => {
-                return Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-            })
-    }
-
-
-/* function renderPokemonCard(pokemon) {
-  const markup = pokemonCardTpl(pokemon);
-  refs.cardContainer.innerHTML = markup;
+  
+  function renderGallery(data) {
+    const markupData = markup(data);
+    return refs.gallery.insertAdjacentHTML('beforeend', markupData);
+  }
 }
 
-function onFetchError(error) {
-  alert('Упс, что-то пошло не так и мы не нашли вашего покемона!');
-} */
- 
-}
+let modalGallery = new SimpleLightbox('.gallery a', {
+    caption: true,
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,    
+}); 
 
 

@@ -18,10 +18,11 @@ export default class FetchBildsAPI {
     async getBilds() {
     const response = await axios.get('https://pixabay.com/api/', this.options);
     this.incrementPage();
-    return response;
+      return response;
+    
   }
 
-  incrementPage() {
+   incrementPage() {
     this.options.params.page += 1;
   }
 
