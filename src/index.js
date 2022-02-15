@@ -12,7 +12,8 @@ const refs = {
     gallery: document.querySelector('.gallery'),
 }
 
-refs.submitBtn.addEventListener('submit', onSubmitBtn);
+refs.inputForm.addEventListener('submit', onSubmitBtn);
+
 const loadbildsApi = new FetchBildsAPI();
 
 
@@ -33,12 +34,13 @@ function onSubmitBtn(e) {
       })
   }
 
-  
   function renderGallery(data) {
     const markupData = markup(data);
     return refs.gallery.insertAdjacentHTML('beforeend', markupData);
   }
 }
+
+console.log(onSubmitBtn())
 
 let modalGallery = new SimpleLightbox('.gallery a', {
     caption: true,
