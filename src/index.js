@@ -78,8 +78,4 @@ function renderGallery(data) {
   }
 }
 
-const loadMoreBtn = new LoadMoreBtn({
-  selector: '[data-action="load-more"]',
-  hidden: true,
-});
 
